@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for test in object_list %}
+    <h3>{{ test.name }} created at : {{ test.created }}</h3>
+
+    {% if test.description %}
+        <p>{{ test.description }}</p>
+    {% endif %}
+
+
+    {% for question in test.questions.all %}
+        {% if question.description %}
+            <p><em>{{ question.description }}</em></p>
+        {% endif %}
+        <p>{{ question.no }}. {{ question.name }}</p>
+        {% for choice in question.choices.all %}
+            <strong>({{ choice.no }})</strong> {{ choice.name }} &nbsp;&nbsp;
+        {% endfor %}
+        <hr>
+    {% endfor %}
+
+{% endfor %}
+
+{% endblock %}
